@@ -2,9 +2,12 @@ import { Controller, useForm } from "react-hook-form";
 import { FormField } from "../FormField.tsx/FormField";
 import { ChangeEvent, useState } from "react";
 import styles from "./todoForm.module.scss";
-import { todoListKey } from "../../constants/constants";
 import { TodoData } from "../../types/types";
 import { nanoid } from "nanoid";
+import {
+  getItemFromLocalStorage,
+  setItemToLocalStorage,
+} from "../../utils/localStorageActions";
 
 interface TodoForm {
   setTaskList: React.Dispatch<React.SetStateAction<TodoData[]>>;
@@ -61,14 +64,13 @@ export const TodoForm = ({ setTaskList }: TodoForm) => {
 
     setTaskList((prev) => [...prev, newTodoElement]);
 
-    const localStorageTodoList = localStorage.getItem(todoListKey);
+    const data = getItemFromLocalStorage();
 
-    if (localStorageTodoList) {
-      const todoList = JSON.parse(localStorageTodoList);
-      const modifiedTodoList = [...todoList, newTodoElement];
-      localStorage.setItem(todoListKey, JSON.stringify(modifiedTodoList));
+    if (data) {
+      const modifiedTodoList: TodoData[] = [...data, newTodoElement];
+      setItemToLocalStorage(modifiedTodoList);
     } else {
-      localStorage.setItem(todoListKey, JSON.stringify([newTodoElement]));
+      setItemToLocalStorage([newTodoElement]);
     }
 
     resetFormValues();

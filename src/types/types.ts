@@ -3,3 +3,8 @@ export interface TodoData {
   status: string;
   value: string;
 }
+
+export interface TodoListState {
+  taskList: TodoData[];
+  setTaskList: React.Dispatch<React.SetStateAction<TodoData[]>>;
+}

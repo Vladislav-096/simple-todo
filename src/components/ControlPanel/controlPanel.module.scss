@@ -1,0 +1,33 @@
+@use "../../styles/_variables.scss" as *;
+@use "../../styles/_mixin.scss" as *;
+
+.panel {
+  .filters {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 7px;
+
+    .filter {
+      &:not(:last-child) {
+        margin-right: 10px;
+      }
+
+      .all {
+        @include button(65px);
+      }
+
+      .active {
+        @include button(90px);
+      }
+
+      .completed {
+        @include button(125px);
+      }
+
+      .filter-action {
+        font-size: 13px;
+        font-weight: 400;
+      }
+    }
+  }
+}

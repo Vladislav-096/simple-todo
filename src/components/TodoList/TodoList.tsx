@@ -1,16 +1,14 @@
 import { useEffect } from "react";
-import { todoListKey } from "../../constants/constants";
-import { TodoData } from "../../types/types";
+import { TodoListState } from "../../types/types";
 import EditIcon from "../../../public/img/edit.svg";
 import RemoveIcon from "../../../public/img/remove.svg";
 import styles from "./todoList.module.scss";
+import {
+  getItemFromLocalStorage,
+  setItemToLocalStorage,
+} from "../../utils/localStorageActions";
 
-interface TodoList {
-  taskList: TodoData[];
-  setTaskList: React.Dispatch<React.SetStateAction<TodoData[]>>;
-}
-
-export const TodoList = ({ taskList, setTaskList }: TodoList) => {
+export const TodoList = ({ taskList, setTaskList }: TodoListState) => {
   const handleStatus = (id: string) => {
     const currentTask = taskList.find((item) => item.id === id);
     if (currentTask) {
@@ -21,26 +19,26 @@ export const TodoList = ({ taskList, setTaskList }: TodoList) => {
       const modifiedTodoList = taskList.map((item) =>
         item.id === id ? modifiedTodo : item
       );
-      localStorage.setItem(todoListKey, JSON.stringify(modifiedTodoList));
+      setItemToLocalStorage(modifiedTodoList);
       setTaskList(modifiedTodoList);
     }
   };
 
   const handleRemove = (id: string) => {
     const modifiedTaskList = taskList.filter((item) => item.id !== id);
-    localStorage.setItem(todoListKey, JSON.stringify(modifiedTaskList));
+    setItemToLocalStorage(modifiedTaskList);
     setTaskList(modifiedTaskList);
   };
 
   useEffect(() => {
-    const todoList = localStorage.getItem(todoListKey);
-    if (todoList) {
-      setTaskList(JSON.parse(todoList));
+    const data = getItemFromLocalStorage();
+    if (data) {
+      setTaskList(data);
     }
   }, []);
 
   return (
-    <ul className={`list-reset`}>
+    <ul className={`list-reset ${styles.list}`}>
       {taskList.map((item, index) => (
         <li className={styles.task} key={index}>
           <div className={styles.text}>
@@ -56,13 +54,13 @@ export const TodoList = ({ taskList, setTaskList }: TodoList) => {
               className={`btn-reset ${styles.action}`}
               onClick={() => handleStatus(item.id)}
             >
-              <img className={styles.edit} src={EditIcon} alt="Edit Icon" />
+              <img className={styles.img} src={EditIcon} alt="Edit Icon" />
             </button>
             <button
               className={`btn-reset ${styles.action}`}
               onClick={() => handleRemove(item.id)}
             >
-              <img className={styles.edit} src={RemoveIcon} alt="Remove Icon" />
+              <img className={styles.img} src={RemoveIcon} alt="Remove Icon" />
             </button>
           </div>
         </li>
