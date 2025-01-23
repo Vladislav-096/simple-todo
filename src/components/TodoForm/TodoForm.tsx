@@ -2,6 +2,9 @@ import { Controller, useForm } from "react-hook-form";
 import { FormField } from "../FormField.tsx/FormField";
 import { ChangeEvent, useState } from "react";
 import styles from "./todoForm.module.scss";
+import { todoListKey } from "../../constants/constants";
+import { TodoListData } from "../types/types";
+import { nanoid } from "nanoid";
 
 interface TodoForm {
   setNote: React.Dispatch<React.SetStateAction<string>>;
@@ -51,6 +54,25 @@ export const TodoForm = ({ setNote }: TodoForm) => {
 
   const onSubmit = (formData: FormTypes) => {
     setNote(formData.note);
+    const newTodoElement: TodoListData = {
+      id: nanoid(10),
+      text: formData.note,
+      status: false,
+    };
+
+    const localStorageTodoList = localStorage.getItem(todoListKey);
+
+    if (localStorageTodoList) {
+      const todoList = JSON.parse(localStorageTodoList);
+      const newLocalStorageTodoList = [...todoList, newTodoElement];
+      localStorage.setItem(
+        todoListKey,
+        JSON.stringify(newLocalStorageTodoList)
+      );
+    } else {
+      localStorage.setItem(todoListKey, JSON.stringify([newTodoElement]));
+    }
+
     resetFormValues();
   };
 
