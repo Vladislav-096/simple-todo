@@ -1,6 +1,8 @@
 import { useEffect } from "react";
 import { todoListKey } from "../../constants/constants";
 import { TodoData } from "../types/types";
+import EditIcon from "../../../public/img/edit.svg";
+import RemoveIcon from "../../../public/img/remove.svg";
 import styles from "./todoList.module.scss";
 
 interface TodoList {
@@ -37,11 +39,27 @@ export const TodoList = ({ taskList, setTaskList }: TodoList) => {
   return (
     <ul className={`list-reset`}>
       {taskList.map((item, index) => (
-        <li key={index}>
-          <p>{item.value}</p>
-          <p>{item.status.toString()}</p>
-          <button onClick={() => handleStatus(item.id)}>change status</button>
-          <button onClick={() => handleRemove(item.id)}>remove elemetn</button>
+        <li className={styles.task} key={index}>
+          <div className={styles.text}>
+            <p className={styles.value}>{item.value}</p>
+            <div
+              className={`${styles.line} ${item.status && styles["show-line"]}`}
+            ></div>
+          </div>
+          <div className={styles.actions}>
+            <button
+              className={`btn-reset ${styles.action}`}
+              onClick={() => handleStatus(item.id)}
+            >
+              <img className={styles.edit} src={EditIcon} alt="Edit Icon" />
+            </button>
+            <button
+              className={`btn-reset ${styles.action}`}
+              onClick={() => handleRemove(item.id)}
+            >
+              <img className={styles.edit} src={RemoveIcon} alt="Remove Icon" />
+            </button>
+          </div>
         </li>
       ))}
     </ul>

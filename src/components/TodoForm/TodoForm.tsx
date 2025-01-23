@@ -100,7 +100,7 @@ export const TodoForm = ({ setTaskList }: TodoForm) => {
       </FormField>
 
       <button type="submit" className={`btn-reset ${styles.submit}`}>
-        Add Reminder
+        Add Task
       </button>
     </form>
   );

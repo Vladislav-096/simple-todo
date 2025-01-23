@@ -3,7 +3,7 @@
 
 .form-field {
   width: inherit;
-  margin-bottom: 22px;
+  margin-bottom: 7px;
 
   .label {
     margin-bottom: 5px;
@@ -19,7 +19,7 @@
       top: 0px;
       left: 9px;
       height: 1px;
-      width: 110px;
+      width: 96px;
       background-color: $secondaryBackground;
       z-index: 400;
     }
@@ -35,7 +35,7 @@
 
       &.withText {
         top: -12px;
-        left: 11px;
+        left: 15px;
       }
     }
   }

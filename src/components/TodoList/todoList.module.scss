@@ -1,0 +1,56 @@
+@use "../../styles/_variables.scss" as *;
+@use "../../styles/_mixin.scss" as *;
+
+.task {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 10px;
+  border-radius: 5px;
+  transition: background-color 0.1s;
+
+  &:hover {
+    background-color: $secondaryBackground;
+  }
+
+  .text {
+    position: relative;
+
+    .line {
+      position: absolute;
+      top: 56%;
+      left: 51%;
+      transform: translate(-50%, -50%);
+      height: 2px;
+      width: 112%;
+      background-color: $buttonRedColor;
+      visibility: hidden;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    .show-line {
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+
+  .actions {
+    display: flex;
+
+    .action {
+      @include button(50px);
+      padding: 3px 12px;
+
+      &:not(:last-child) {
+        margin-right: 5px;
+      }
+
+      .edit {
+        width: 20px;
+        height: 20px;
+      }
+    }
+  }
+}

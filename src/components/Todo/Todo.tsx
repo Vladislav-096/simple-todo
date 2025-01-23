@@ -9,8 +9,10 @@ export const Todo = () => {
 
   return (
     <div className={styles.wrapper}>
-      <TodoForm setTaskList={setTaskList} />
-      <TodoList taskList={taskList} setTaskList={setTaskList} />
+      <div className={styles.container}>
+        <TodoForm setTaskList={setTaskList} />
+        <TodoList taskList={taskList} setTaskList={setTaskList} />
+      </div>
     </div>
   );
 };
