@@ -2,15 +2,15 @@ import { useState } from "react";
 import { TodoForm } from "../TodoForm/TodoForm";
 import styles from "./todo.module.scss";
 import { TodoList } from "../TodoList/TodoList";
-import { TodoListData } from "../types/types";
+import { TodoData } from "../types/types";
 
 export const Todo = () => {
-  const [todoList, setTodoList] = useState<TodoListData[]>([]);
+  const [taskList, setTaskList] = useState<TodoData[]>([]);
 
   return (
     <div className={styles.wrapper}>
-      <TodoForm setTodoList={setTodoList} />
-      <TodoList todoList={todoList} setTodoList={setTodoList} />
+      <TodoForm setTaskList={setTaskList} />
+      <TodoList taskList={taskList} setTaskList={setTaskList} />
     </div>
   );
 };

@@ -3,38 +3,38 @@ import { FormField } from "../FormField.tsx/FormField";
 import { ChangeEvent, useState } from "react";
 import styles from "./todoForm.module.scss";
 import { todoListKey } from "../../constants/constants";
-import { TodoListData } from "../types/types";
+import { TodoData } from "../types/types";
 import { nanoid } from "nanoid";
 
 interface TodoForm {
-  setTodoList: React.Dispatch<React.SetStateAction<TodoListData[]>>;
+  setTaskList: React.Dispatch<React.SetStateAction<TodoData[]>>;
 }
 
 interface FormTypes {
-  note: string;
+  task: string;
 }
 
-const requiredAndText = {
+const required = {
   required: "Field must be filled",
 };
 
-export const TodoForm = ({ setTodoList }: TodoForm) => {
-  const [text, setText] = useState<string>("");
-  const [isTextFieldFocuse, setIsTextFieldFocuse] = useState<boolean>(false);
+export const TodoForm = ({ setTaskList }: TodoForm) => {
+  const [taskValue, setTaskValue] = useState<string>("");
+  const [isTaskFieldFocuse, setIsTaskFieldFocuse] = useState<boolean>(false);
 
   const handleFocus = () => {
-    setIsTextFieldFocuse(true);
+    setIsTaskFieldFocuse(true);
   };
 
   const handleBlur = () => {
-    setIsTextFieldFocuse(false);
+    setIsTaskFieldFocuse(false);
   };
 
-  const handleChangeNote = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleChangeTask = (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
-    clearErrors("note");
-    setValue("note", value);
-    setText(value);
+    clearErrors("task");
+    setValue("task", value);
+    setTaskValue(value);
   };
 
   const {
@@ -48,28 +48,25 @@ export const TodoForm = ({ setTodoList }: TodoForm) => {
 
   const resetFormValues = () => {
     reset();
-    setText("");
+    setTaskValue("");
     clearErrors();
   };
 
   const onSubmit = (formData: FormTypes) => {
-    const newTodoElement: TodoListData = {
+    const newTodoElement: TodoData = {
       id: nanoid(10),
-      text: formData.note,
+      value: formData.task,
       status: false,
     };
 
-    setTodoList((prev) => [...prev, newTodoElement]);
+    setTaskList((prev) => [...prev, newTodoElement]);
 
     const localStorageTodoList = localStorage.getItem(todoListKey);
 
     if (localStorageTodoList) {
       const todoList = JSON.parse(localStorageTodoList);
-      const newLocalStorageTodoList = [...todoList, newTodoElement];
-      localStorage.setItem(
-        todoListKey,
-        JSON.stringify(newLocalStorageTodoList)
-      );
+      const modifiedTodoList = [...todoList, newTodoElement];
+      localStorage.setItem(todoListKey, JSON.stringify(modifiedTodoList));
     } else {
       localStorage.setItem(todoListKey, JSON.stringify([newTodoElement]));
     }
@@ -80,20 +77,20 @@ export const TodoForm = ({ setTodoList }: TodoForm) => {
   return (
     <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
       <FormField
-        isFocused={isTextFieldFocuse}
-        errorMessage={errors.note?.message}
-        text={text} // For placeholder functionality only..
-        placeholder="New Reminder"
+        isFocused={isTaskFieldFocuse}
+        errorMessage={errors.task?.message}
+        text={taskValue} // For placeholder functionality only..
+        placeholder="Create Task"
       >
         <Controller
-          name="note"
+          name="task"
           control={control}
-          rules={requiredAndText}
+          rules={required}
           render={() => (
             <input
               className={styles.input}
-              value={text}
-              onChange={handleChangeNote}
+              value={taskValue}
+              onChange={handleChangeTask}
               type="text"
               onFocus={handleFocus}
               onBlur={handleBlur}

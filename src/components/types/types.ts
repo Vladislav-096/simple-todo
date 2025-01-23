@@ -1,5 +1,5 @@
-export interface TodoListData {
+export interface TodoData {
   id: string;
   status: boolean;
-  text: string;
+  value: string;
 }
