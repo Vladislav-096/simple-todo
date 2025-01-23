@@ -3,7 +3,7 @@ import { FormField } from "../FormField.tsx/FormField";
 import { ChangeEvent, useState } from "react";
 import styles from "./todoForm.module.scss";
 import { todoListKey } from "../../constants/constants";
-import { TodoData } from "../types/types";
+import { TodoData } from "../../types/types";
 import { nanoid } from "nanoid";
 
 interface TodoForm {
@@ -56,7 +56,7 @@ export const TodoForm = ({ setTaskList }: TodoForm) => {
     const newTodoElement: TodoData = {
       id: nanoid(10),
       value: formData.task,
-      status: false,
+      status: "ACTIVE",
     };
 
     setTaskList((prev) => [...prev, newTodoElement]);

@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { todoListKey } from "../../constants/constants";
-import { TodoData } from "../types/types";
+import { TodoData } from "../../types/types";
 import EditIcon from "../../../public/img/edit.svg";
 import RemoveIcon from "../../../public/img/remove.svg";
 import styles from "./todoList.module.scss";
@@ -14,7 +14,10 @@ export const TodoList = ({ taskList, setTaskList }: TodoList) => {
   const handleStatus = (id: string) => {
     const currentTask = taskList.find((item) => item.id === id);
     if (currentTask) {
-      const modifiedTodo = { ...currentTask, status: !currentTask?.status };
+      const modifiedTodo = {
+        ...currentTask,
+        status: currentTask.status === "ACTIVE" ? "COMPLETED" : "ACTIVE",
+      };
       const modifiedTodoList = taskList.map((item) =>
         item.id === id ? modifiedTodo : item
       );
@@ -43,7 +46,9 @@ export const TodoList = ({ taskList, setTaskList }: TodoList) => {
           <div className={styles.text}>
             <p className={styles.value}>{item.value}</p>
             <div
-              className={`${styles.line} ${item.status && styles["show-line"]}`}
+              className={`${styles.line} ${
+                item.status === "ACTIVE" && styles["show-line"]
+              }`}
             ></div>
           </div>
           <div className={styles.actions}>

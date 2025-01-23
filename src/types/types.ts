@@ -1,5 +1,5 @@
 export interface TodoData {
   id: string;
-  status: boolean;
+  status: string;
   value: string;
 }
