@@ -17,3 +17,19 @@
     background-color: $tertaryBackground;
   }
 }
+
+@mixin input() {
+  position: relative;
+  width: inherit;
+  padding: 9px;
+  height: 40px;
+  color: $primaryColor;
+  background-color: $secondaryBackground;
+  border-radius: 5px;
+  border: 1px solid $borderColor;
+
+  &:focus {
+    outline: none;
+    border: 1px solid $secondaryColor;
+  }
+}

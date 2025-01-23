@@ -1,0 +1,46 @@
+@use "../../styles/_variables.scss" as *;
+@use "../../styles/_mixin.scss" as *;
+
+.form-field {
+  width: inherit;
+  margin-bottom: 22px;
+
+  .label {
+    margin-bottom: 5px;
+    font-weight: 700;
+  }
+
+  .input-wrapper {
+    position: relative;
+    width: inherit;
+
+    .hide-border {
+      position: absolute;
+      top: 0px;
+      left: 9px;
+      height: 1px;
+      width: 110px;
+      background-color: $secondaryBackground;
+      z-index: 400;
+    }
+
+    .placeholder {
+      position: absolute;
+      top: 8px;
+      left: 12px;
+      color: $secondaryColor;
+      pointer-events: none;
+      z-index: 500;
+      transition: top 0.1s, left 0.1s;
+
+      &.withText {
+        top: -12px;
+        left: 11px;
+      }
+    }
+  }
+
+  .error {
+    color: #ff0000;
+  }
+}

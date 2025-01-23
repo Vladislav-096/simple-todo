@@ -1,0 +1,14 @@
+@use "../../styles/_variables.scss" as *;
+@use "../../styles/_mixin.scss" as *;
+
+.form {
+  width: 400px;
+
+  .input {
+    @include input();
+  }
+
+  .submit {
+    @include button(155px);
+  }
+}
