@@ -7,7 +7,7 @@ import { TodoListData } from "../types/types";
 import { nanoid } from "nanoid";
 
 interface TodoForm {
-  setNote: React.Dispatch<React.SetStateAction<string>>;
+  setTodoList: React.Dispatch<React.SetStateAction<TodoListData[]>>;
 }
 
 interface FormTypes {
@@ -18,7 +18,7 @@ const requiredAndText = {
   required: "Field must be filled",
 };
 
-export const TodoForm = ({ setNote }: TodoForm) => {
+export const TodoForm = ({ setTodoList }: TodoForm) => {
   const [text, setText] = useState<string>("");
   const [isTextFieldFocuse, setIsTextFieldFocuse] = useState<boolean>(false);
 
@@ -53,12 +53,13 @@ export const TodoForm = ({ setNote }: TodoForm) => {
   };
 
   const onSubmit = (formData: FormTypes) => {
-    setNote(formData.note);
     const newTodoElement: TodoListData = {
       id: nanoid(10),
       text: formData.note,
       status: false,
     };
+
+    setTodoList((prev) => [...prev, newTodoElement]);
 
     const localStorageTodoList = localStorage.getItem(todoListKey);
 

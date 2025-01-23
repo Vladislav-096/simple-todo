@@ -1,22 +1,21 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { todoListKey } from "../../constants/constants";
 import { TodoListData } from "../types/types";
 import styles from "./todoList.module.scss";
 
 interface TodoList {
-  note: string;
+  todoList: TodoListData[];
+  setTodoList: React.Dispatch<React.SetStateAction<TodoListData[]>>;
 }
 
-export const TodoList = ({ note }: TodoList) => {
-  const [todoList, setTodoList] = useState<TodoListData[]>([]);
-  console.log("todoList", todoList);
-
+export const TodoList = ({ todoList, setTodoList }: TodoList) => {
   useEffect(() => {
     const todoList = localStorage.getItem(todoListKey);
     if (todoList) {
       setTodoList(JSON.parse(todoList));
     }
   }, []);
+
   return (
     <ul className={`list-reset`}>
       {todoList.map((item, index) => (
