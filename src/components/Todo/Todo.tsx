@@ -13,7 +13,7 @@ export const Todo = () => {
       <div className={styles.container}>
         <TodoForm setTaskList={setTaskList} />
         <TodoList taskList={taskList} setTaskList={setTaskList} />
-        <ControlPanel taskList={taskList} setTaskList={setTaskList}/>
+        <ControlPanel setTaskList={setTaskList}/>
       </div>
     </div>
   );

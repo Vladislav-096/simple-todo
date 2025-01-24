@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Status, Tabs, TodoListState } from "../../types/types";
+import { Status, Tabs, TodoData } from "../../types/types";
 import {
   getItemFromLocalStorage,
   setItemToLocalStorage,
@@ -8,7 +8,11 @@ import styles from "./controlPanel.module.scss";
 
 type Tab = "ALL" | "COMPLETED" | "ACTIVE";
 
-export const ControlPanel = ({ taskList, setTaskList }: TodoListState) => {
+interface ControlPanel {
+  setTaskList: React.Dispatch<React.SetStateAction<TodoData[]>>;
+}
+
+export const ControlPanel = ({ setTaskList }: ControlPanel) => {
   const [tab, setTab] = useState<Tab>(Tabs.All);
 
   const tasksLeft = getItemFromLocalStorage()

@@ -1,14 +1,21 @@
 import { useEffect } from "react";
-import { TodoListState } from "../../types/types";
-import EditIcon from "../../../public/img/edit.svg";
-import RemoveIcon from "../../../public/img/remove.svg";
+import { Status, TodoData } from "../../types/types";
+// import EditIcon from "../../../public/img/edit.svg";
+// import RemoveIcon from "../../../public/img/remove.svg";
+import EditIcon from "../../assets/edit.svg";
+import RemoveIcon from "../../assets/remove.svg";
 import styles from "./todoList.module.scss";
 import {
   getItemFromLocalStorage,
   setItemToLocalStorage,
 } from "../../utils/localStorageActions";
 
-export const TodoList = ({ taskList, setTaskList }: TodoListState) => {
+interface TodoList {
+  taskList: TodoData[];
+  setTaskList: React.Dispatch<React.SetStateAction<TodoData[]>>;
+}
+
+export const TodoList = ({ taskList, setTaskList }: TodoList) => {
   const handleStatus = (id: string) => {
     const currentTask = taskList.find((item) => item.id === id);
     if (currentTask) {
@@ -42,12 +49,16 @@ export const TodoList = ({ taskList, setTaskList }: TodoListState) => {
       {taskList.map((item, index) => (
         <li className={styles.task} key={index}>
           <div className={styles.text}>
-            <p className={styles.value}>{item.value}</p>
-            <div
-              className={`${styles.line} ${
-                item.status === "COMPLETED" && styles["show-line"]
-              }`}
-            ></div>
+            <div className={styles.value}>
+              <span className={styles.note}>
+                <span>{item.value}</span>
+                <div
+                  className={`${styles.line} ${
+                    item.status === Status.Completed && styles["show-line"]
+                  }`}
+                ></div>
+              </span>
+            </div>
           </div>
           <div className={styles.actions}>
             <button

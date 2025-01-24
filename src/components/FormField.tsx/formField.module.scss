@@ -2,6 +2,7 @@
 @use "../../styles/_mixin.scss" as *;
 
 .form-field {
+  position: relative;
   width: inherit;
   margin-bottom: 7px;
 
@@ -41,6 +42,8 @@
   }
 
   .error {
+    position: absolute;
+    right: 0;
     color: #ff0000;
   }
 }

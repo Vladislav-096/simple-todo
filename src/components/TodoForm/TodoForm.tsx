@@ -2,8 +2,8 @@ import { Controller, useForm } from "react-hook-form";
 import { FormField } from "../FormField.tsx/FormField";
 import { ChangeEvent, useState } from "react";
 import styles from "./todoForm.module.scss";
-import { TodoData } from "../../types/types";
-import { nanoid } from "nanoid";
+import { Status, TodoData } from "../../types/types";
+import { generateId } from "../../utils/generateId";
 import {
   getItemFromLocalStorage,
   setItemToLocalStorage,
@@ -57,9 +57,9 @@ export const TodoForm = ({ setTaskList }: TodoForm) => {
 
   const onSubmit = (formData: FormTypes) => {
     const newTodoElement: TodoData = {
-      id: nanoid(10),
+      id: generateId(),
       value: formData.task,
-      status: "ACTIVE",
+      status: Status.Active,
     };
 
     setTaskList((prev) => [...prev, newTodoElement]);
