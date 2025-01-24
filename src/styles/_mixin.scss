@@ -33,3 +33,21 @@
     border: 1px solid $secondaryColor;
   }
 }
+
+@mixin customScroll() {
+  &::-webkit-scrollbar {
+    // width: 1px; /* ширина scrollbar */
+    width: 3px;
+    height: 3px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent; /* цвет дорожки */
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: $shh; /* цвет плашки */
+    border-radius: 5px; /* закругления плашки */
+    // border: 3px solid red; /* padding вокруг плашки */
+  }
+}

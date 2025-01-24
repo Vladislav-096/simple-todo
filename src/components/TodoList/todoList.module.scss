@@ -3,6 +3,9 @@
 
 .list {
   margin-bottom: 21px;
+  height: calc(80vh - 210px);
+  overflow: auto;
+  @include customScroll();
 
   .task {
     position: relative;
@@ -31,6 +34,19 @@
     .text {
       position: relative;
 
+      .value {
+        width: 260px;
+        overflow-y: auto;
+        font-size: 14px;
+
+        @media (max-width: 480px) {
+          width: 175px;
+          font-size: 13px;
+        }
+
+        @include customScroll();
+      }
+
       .line {
         position: absolute;
         top: 56%;
@@ -41,7 +57,7 @@
         background-color: $buttonRedColor;
         visibility: hidden;
         opacity: 0;
-        transition: opacity 0.2s;
+        transition: opacity 0.1s;
       }
 
       .show-line {
@@ -59,6 +75,11 @@
 
         &:not(:last-child) {
           margin-right: 5px;
+        }
+
+        @media (max-width: 480px) {
+          width: 40px;
+          padding: 0px 5px;
         }
 
         .img {

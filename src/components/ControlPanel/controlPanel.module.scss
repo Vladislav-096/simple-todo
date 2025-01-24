@@ -24,10 +24,29 @@
         @include button(125px);
       }
 
+      .selected {
+        background-color: $tertaryBackground;
+      }
+
       .filter-action {
         font-size: 13px;
         font-weight: 400;
       }
+    }
+  }
+
+  .actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .info {
+    }
+
+    .clear {
+      @include button(155px);
+      font-size: 13px;
+      font-weight: 400;
     }
   }
 }

@@ -45,7 +45,7 @@ export const TodoList = ({ taskList, setTaskList }: TodoListState) => {
             <p className={styles.value}>{item.value}</p>
             <div
               className={`${styles.line} ${
-                item.status === "ACTIVE" && styles["show-line"]
+                item.status === "COMPLETED" && styles["show-line"]
               }`}
             ></div>
           </div>
