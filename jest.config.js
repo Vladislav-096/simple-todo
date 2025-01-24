@@ -10,7 +10,9 @@ export default {
       '^.+\\.(ts|tsx)$': ['ts-jest', {
         tsconfig: 'tsconfig.test.json'
       }],
-      '^.+\\.(js|jsx)$': 'babel-jest'
+      '^.+\\.(js|jsx|mjs)$': ['ts-jest', {
+        useESM: true
+      }]
     },
     moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
     testPathIgnorePatterns: ['/node_modules/', '/dist/']
