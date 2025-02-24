@@ -2,7 +2,6 @@
 @use "../../styles/_mixin.scss" as *;
 
 .list {
-  margin-bottom: 21px;
   height: calc(80vh - 210px);
   overflow: auto;
   @include customScroll();
@@ -13,7 +12,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 5px 10px 5px 5px;
-    border-radius: 5px;
+    border-bottom: 1px solid #000;
     transition: background-color 0.1s;
 
     &:hover {
@@ -41,7 +40,7 @@
 
           .line {
             position: absolute;
-            top: 10px;
+            top: 9px;
             left: 3px;
             transform: translateY(-50%);
             height: 2px;

@@ -9,5 +9,10 @@
     @media(max-width: 480px) {
       width: 290px;
     }
+
+    .todo-main {
+      outline: 1px solid #000;
+      border-radius: 5px;
+    }
   }
 }

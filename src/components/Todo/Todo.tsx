@@ -12,8 +12,10 @@ export const Todo = () => {
     <div className={styles.wrapper}>
       <div className={styles.container}>
         <TodoForm setTaskList={setTaskList} />
-        <TodoList taskList={taskList} setTaskList={setTaskList} />
-        <ControlPanel setTaskList={setTaskList}/>
+        <div className={styles["todo-main"]}>
+          <TodoList taskList={taskList} setTaskList={setTaskList} />
+          <ControlPanel setTaskList={setTaskList} />
+        </div>
       </div>
     </div>
   );
