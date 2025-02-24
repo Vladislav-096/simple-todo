@@ -72,10 +72,6 @@
           background-color: $actionButtonHover;
         }
 
-        &:not(:last-child) {
-          margin-right: 5px;
-        }
-
         @media (max-width: 480px) {
           width: 40px;
           padding: 0px 5px;

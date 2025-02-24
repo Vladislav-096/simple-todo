@@ -16,5 +16,6 @@
 ### Запуск в режиме разработки
 
 ```
-npm run dev
+npm i
+npm run start
 ```
