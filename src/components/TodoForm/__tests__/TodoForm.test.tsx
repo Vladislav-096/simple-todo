@@ -1,7 +1,8 @@
-import { render, screen, fireEvent, act } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import { TodoForm } from "../TodoForm";
 import * as localStorageActions from "../../../utils/localStorageActions";
 import { TodoData, Status } from "../../../types/types";
+import { act } from "react";
 
 // Mock the ID generator
 jest.mock("../../../utils/generateId", () => ({
@@ -49,6 +50,7 @@ describe("TodoForm", () => {
   });
 
   it("successfully submits form and updates task list", async () => {
+    // ?
     (localStorageActions.getItemFromLocalStorage as jest.Mock).mockReturnValue(
       null
     );
@@ -66,9 +68,12 @@ describe("TodoForm", () => {
     });
 
     expect(mockSetTaskList).toHaveBeenCalled();
+    // Первый вызов setTaskList в onSubmit (он там только один и есть), с первым аргументов
+    // (колбэк, в моем случае, в аргументе которого лежит предыдущее значение)
     const setTaskListCallback = mockSetTaskList.mock.calls[0][0];
     const previousState: TodoData[] = [];
     const newState = setTaskListCallback(previousState);
+
     expect(newState).toEqual([
       {
         id: "mocked-id",
@@ -97,6 +102,7 @@ describe("TodoForm", () => {
         status: "ACTIVE",
       },
     ];
+
     (localStorageActions.getItemFromLocalStorage as jest.Mock).mockReturnValue(
       existingTasks
     );

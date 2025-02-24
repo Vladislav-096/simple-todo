@@ -4,17 +4,17 @@
   display: block;
   padding: 7px;
   width: $width;
-  border: 1px solid $borderColor;
   border-radius: 5px;
   cursor: pointer;
   text-align: center;
   font-size: 16px;
   font-weight: 700;
-  color: $shh;
+  color: $secondaryColor;
+  background-color: $buttonBackgroundDefault;
   transition: background-color 0.2s;
 
   &:hover {
-    background-color: $tertaryBackground;
+    background-color: $buttonBackgroundHover;
   }
 }
 
@@ -24,13 +24,18 @@
   padding: 9px;
   height: 40px;
   color: $primaryColor;
-  background-color: $secondaryBackground;
+  background-color: $inputBackgroundDefault;
   border-radius: 5px;
-  border: 1px solid $borderColor;
+  border: 1px solid $inputBorder;
 
   &:focus {
     outline: none;
-    border: 1px solid $secondaryColor;
+    border: 2px solid $inputFocusBorderColor;
+  }
+
+  &:hover {
+    outline: none;
+    border: 2px solid $inputHoverBorderColor;
   }
 }
 
@@ -45,7 +50,7 @@
   }
 
   &::-webkit-scrollbar-thumb {
-    background-color: $shh;
+    background-color: $scrollColor;
     border-radius: 5px;
   }
 }

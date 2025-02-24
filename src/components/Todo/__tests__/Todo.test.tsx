@@ -1,5 +1,6 @@
-import { render, screen, fireEvent, act } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import { Todo } from "../Todo";
+import { act } from "react";
 // import userEvent from '@testing-library/user-event';
 
 describe("Todo Component", () => {
@@ -15,9 +16,12 @@ describe("Todo Component", () => {
   });
 
   it("allows adding new tasks", async () => {
+    // container — это DOM-элемент, который является корнем рендеринга компонента
     const { container } = render(<Todo />);
 
     const input = screen.getByRole("textbox");
+    // act - нужен для работы с асинхронными операциями или с операциями, которые могу затронуть асинхронную логику.
+    // Гарантировать, что все асинхронные обновления состояния или рендеринга компонента были завершены, прежде чем тест будет продолжен.
     await act(async () => {
       fireEvent.change(input, { target: { value: "New Task" } });
     });
@@ -46,11 +50,15 @@ describe("Todo Component", () => {
     await act(async () => {
       fireEvent.change(input, { target: { value: "Task 2" } });
     });
+
     await act(async () => {
       fireEvent.submit(form!);
     });
 
     expect(screen.getByText("2")).toBeInTheDocument();
+    // Регулярное выражение /tasks? left/ ищет строку, которая начинается с "task" или "tasks" 
+    // (буква "s" может быть как присутствующей, так и отсутствующей). 
+    // После этого должно быть слово "left".
     expect(screen.getByText(/tasks? left/)).toBeInTheDocument();
   });
 });
