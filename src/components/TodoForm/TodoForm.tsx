@@ -1,5 +1,5 @@
 import { Controller, useForm } from "react-hook-form";
-import { FormField } from "../FormField.tsx/FormField";
+import { FormField } from "../FormField/FormField";
 import { ChangeEvent, useState } from "react";
 import styles from "./todoForm.module.scss";
 import { Status, TodoData } from "../../types/types";
